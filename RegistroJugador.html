@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <center><h1>FORMULARIO DE REGISTRO JUGADOR</h1>
+        
+            <form name="usuarios" action="Php/Conexion.php" method="POST">
+                <table border="1" >
+
+                    <tr >                  
+                      <th>CEDULA</th>
+                      <th>NOMBRE EQUIPO</th>
+                    </tr>
+                    <tr>
+                      <td><input type="text" name="Cedula"></td>
+                       <td align="center"><select name="Equipo">
+                        <option value="1">AMERICA</option>
+                        <option value="2">RIVER PLATE</option>
+                        <option value="3">BARCELONA</option>
+                        <option value="4">LIVEPOOL</option>
+                        <option value="5">MALAGA</option>
+                        <option value="6">CELTA</option>
+                        <option value="7">RACING</option>
+                        <option value="8">MILAN</option>
+                        <option value="9">JUVENTUS</option>
+                        </select>
+                        </td>
+                    </tr>
+                </table>
+                
+                <br>
+                
+                <table border="1">
+                  <tr>                  
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>FECHA NACIMIENTO</th>
+                  </tr>
+                  <tr>
+                    <td><input type="text" name="Nombre"></td>
+                    <td><input type="text" name="Apellido"></td>
+                    <td><input type="date" name="Fnacim"></td>
+                  </tr>
+                
+                </table>
+                
+                <br>
+                
+                <table border="1">
+                  <tr>                  
+                    <th>Posicion</th>
+                  </tr>
+                  <tr>
+                    <td align="center"><select name="Posicion">
+                      <option value="ARQUERO">ARQUERO</option>
+                      <option value="DEFENSA CENTRAL">DEFENSA CENTRAL</option>
+                      <option value="LATERAL">LATERAL</option>
+                      <option value="MEDIOCAMPISTA">MEDIOCAMPISTA</option>
+                      <option value="EXTREMO">EXTREMO</option>
+                      <option value="DELANTERO">DELANTERO</option>
+                      </select>
+                      </td>
+                  </tr>
+                </table>
+                
+                <br>
+                
+                <br>
+                <button type="submit">CREAR JUGADOR</button>
+                <br>
+                <br>
+                <a href="Index.html">Equipos</a>
+               
+            </form>
+        </center>
+    </body>
+</html>
