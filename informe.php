@@ -4,54 +4,42 @@ $equipo;
 $posicion;
 $edad;
 $where = '';
+$where1 = '';
 
-if(isset($_REQUEST['equipo'])){
+if(isset($_REQUEST['BO'])){
     
-     $equipo =$_REQUEST['equipo'];
-     $posicion=$_REQUEST['posicion'];
-     $edad=$_REQUEST['edad'];
-         
-      if($equipo != ""){
-            if($posicion != ""){
-                if($edad != ""){
-                    $where = "WHERE eq.id_equ = '$equipo' AND ju.posicion_jug = '$posicion' AND ju.edad_jug = '$edad' ";  
-                    }
-                else{
-                    $where = "WHERE eq.id_equ = '$equipo' AND ju.posicion_jug = '$posicion'";
-                }
-            }
-            else{
-                $where = "WHERE eq.id_equ = '$equipo'";
-            } 
-        }
-        elseif ($posicion != "") {
-                $where = "WHERE ju.posicion_jug = '$posicion' ";  
-        }
-        else{
+    $equipo =$_REQUEST['equipo'];
+    $posicion=$_REQUEST['posicion'];
+    $edad=$_REQUEST['edad'];
+            
+    if($equipo == ""){
+        if($posicion == ""){
             if($edad != ""){
-                $where = "WHERE ju.edad_jug = '$edad' ";  
-            }
-        }
-
-        if($equipo == ""){
-            if($posicion == ""){
-                if($edad != ""){
-                    $where = "WHERE eq.id_equ = '$equipo' OR ju.posicion_jug = '$posicion' OR ju.edad_jug = '$edad' ";  
-                    }
-                else{
-                    $where = "WHERE eq.id_equ = '$equipo' OR ju.posicion_jug = '$posicion'";
+                $where = "WHERE eq.id_equ = '$equipo' OR ju.posicion_jug = '$posicion' OR ju.edad_jug = '$edad' ";  
                 }
-
-            }
             else{
-                $where = "WHERE eq.id_equ = '$equipo' OR ju.posicion_jug = '$posicion' OR ju.edad_jug = '$edad' "; 
+                $where = "WHERE eq.id_equ = '$equipo' OR ju.posicion_jug = '$posicion'";
             }
-           
+
         }
         else{
-            $where = "WHERE eq.id_equ = '$equipo' "; 
+            $where = "WHERE eq.id_equ = '$equipo' OR ju.posicion_jug = '$posicion' OR ju.edad_jug = '$edad' "; 
         }
+       
     }
+    else{
+        $where = "WHERE eq.id_equ = '$equipo' "; 
+    }
+}
+
+/*if(isset($_REQUEST['BY'])){
+    
+      if($equipo1 != "" || $posicion1 !="" || $edad1 != "")
+      {
+        $where1 = "WHERE eq.id_equ = '$equipo1' AND ju.posicion_jug = '$posicion1' AND ju.edad_jug = '$edad1' ";           
+    }
+} */   
+
 
 
 $host ="localhost";
@@ -61,7 +49,7 @@ $password = "";
 
 $cnx =new PDO("mysql:host=$host;dbname=$dbname",$username,$password);
 
-$query = "SELECT * FROM jugador AS ju JOIN equipo eq ON ju.id_equ=eq.id_equ JOIN estadio es ON eq.id_equ=es.id_equ $where  ORDER BY ju.nombre_jug ASC";
+$query = "SELECT * FROM jugador AS ju JOIN equipo eq ON ju.id_equ=eq.id_equ JOIN estadio es ON eq.id_equ=es.id_equ $where $where1 ORDER BY ju.nombre_jug ASC";
 
 $q = $cnx->prepare($query);
 
@@ -109,10 +97,10 @@ $informes = $q->fetchAll();
     <input type="submit" value="Buscar O" name="BO" >    
     </form>
     <br>
-    <form > <input type="submit" value="Buscar Y" name="BY"> 
+    <form  action="informe.php"> <input type="submit" value="Buscar Y" name="BY"> 
     </form>
     <br>
-    <form> <input type="submit" value="Mostrar Todo" name="BT"> 
+    <form action="informe.php"> <input type="submit" value="Mostrar Todo" name="BT"> 
     </form>
 
     <h1>BD FUTBOL</h1>
@@ -188,7 +176,3 @@ $informes = $q->fetchAll();
 
       </body>
 </html>
-
-
-
-
